@@ -117,27 +117,39 @@ int main()
 	
 	int opcao=0; //Definindo as Variaveis.
 	int	laco=1; // DEFININDO VARIAVEIS
+	char senhadigitada[10]="a";
+	int comparacao;
 	
-	for(laco=1;laco=1;)
+	
+	printf("\t###Cartório da Ebac###\n\n"); //Inicio do Menu
+	printf("Login de Administrador.\n\nDigite a sua senha:");
+	scanf("%s", senhadigitada);
+	
+	comparacao = strcmp (senhadigitada, "admin");
+	
+	if (comparacao == 0)
 	{
+	
+		for(laco=1;laco=1;)
+		{
 		
 		
-		system("cls"); // RESPONSAVEL POR LIMPA A TELA.
+			system("cls"); // RESPONSAVEL POR LIMPA A TELA.
 	
 	
-		setlocale(LC_ALL, "Portuguese"); // Definindo as Linguagens.
+			setlocale(LC_ALL, "Portuguese"); // Definindo as Linguagens.
 	
-		printf("\t###Cartório da Ebac###\n\n"); //Inicio do Menu
-		printf("Escolha as opções desejadas do MENU\n\n");
-		printf("\t1 - Registrar Nomes\n\n");
-		printf("\t2 - Consultar os Nomes\n\n");
-		printf("\t3 - Deletar Nomes \n\n"); // Fim do Menu
-		printf("\n\t4 - Sair do Sistema\n\n");
-		printf("Opção:");
+			printf("\t###Cartório da Ebac###\n\n"); //Inicio do Menu
+			printf("Escolha as opções desejadas do MENU\n\n");
+			printf("\t1 - Registrar Nomes\n\n");
+			printf("\t2 - Consultar os Nomes\n\n");
+			printf("\t3 - Deletar Nomes \n\n"); // Fim do Menu
+			printf("\n\t4 - Sair do Sistema\n\n");
+			printf("Opção:");
 	
-		scanf("%d", &opcao); // Armazenando a escolha do usuario.
+			scanf("%d", &opcao); // Armazenando a escolha do usuario.
 	
-		system("cls"); // RESPONSAVEL POR LIMPA A TELA
+			system("cls"); // RESPONSAVEL POR LIMPA A TELA
 		
 		
 			switch (opcao) // INICIO DA SELEÇÃO DO MENU
@@ -163,10 +175,14 @@ int main()
 								printf("Você escolheu uma opção Invalida.\n");
 								system("pause");
 							break;
-	        }	//Fim da seleção	
-	
-	
-	
+	    	}
+		} 
 	}
+	else
+	printf("\n\nSenha Incorreta");
+	
 }
+	
+	
+
 
