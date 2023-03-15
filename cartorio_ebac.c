@@ -16,16 +16,16 @@ int registrar() //FUNÇÃO RESPONSAVEL POR CADASTRA OS USUARIOS NO SISTEMA.
 		printf("Digite o CPF a ser cadastrado :"); // COLETANDO INFORMAÇÕES DO USUARIO.
 		scanf("%s",cpf); // %s REFERE-SE A STRINGS.
 	
-	strcpy(arquivo, cpf); /// RESPONSAVEL POR COPIAR OS VALORES DAS STRINGS.
+	strcpy(arquivo, cpf); /// RESPONSAVEL POR COPIAR OS VALORES DAS STRINGS. OBS: O NOME DOS ARQUIVO SERÃO OS CPFS,
 	
 	FILE *file;        // CRIAR ARQUIVO NO BANCO DE DADOS
-	file = fopen(arquivo,"w"); // ABRIU ARQUIVO E O "W" É PRA ESCREVER
+	file = fopen(arquivo,"w"); // ABRIU ARQUIVO E O "W" É PRA ESCREVER. 
 	fprintf(file,cpf); // SALVOU VALOR DA VARIAVEL.
 	fclose(file);     // FECHAR O ARQUIVO.
 	
-	file = fopen(arquivo, "a"); 
-	fprintf(file,","); // SALVOU VALOR DA VARIAVEL
-	fclose(file); // FECHAR ARQUIVO
+	file = fopen(arquivo, "a"); // ABRIU O ARQUIVO.
+	fprintf(file,","); // COLOCOU A "," COMO VARIAVEL.
+	fclose(file); // FECHOU ARQUIVO
 	
 		printf("Digite seu nome:"); //COLETANDO INFORMAÇÕES DE NOME DO USUARIO.
 		scanf("%s",nome); // "%S" REFERE-SE A STRINGS.
@@ -65,7 +65,7 @@ int consultar()//FUNÇÃO RESPONSAVEL POR CONSULTAR OS USUARIOS.
   	char cpf[40]; // VARIAVEL
   	char conteudo[200]; // VARIAVEL
   	
-  	printf("Digite o numero de CPF a ser consultado : "); // PARA O USUARIO DIGITA CPF.
+  	printf("Digite o numero de CPF a ser consultado : "); // PARA O USUARIO DIGITA CPF PARA SER CONSULTADO.
   	scanf("%s", cpf);// "%S" REFERE-SE A STRINGS
   	
   		FILE *file; //CRIOU ARQUIVO NO BANCO DE DADOS
@@ -87,31 +87,35 @@ system("pause"); // PAUSA DE SISTEMA
 }
 int deletar()
 {
-	setlocale(LC_ALL, "Portuguese"); // Definindo as Linguagens.
-	
 	char cpf[40];
 	
+	printf("Digite o CPF do usuário a ser deletado: ");
+	scanf("%s",cpf);
+				
+	FILE *file;	
+	file = fopen(cpf,"r");
 	
-	printf("Digite o usuario que deseja deletar:\n"); // MENSAGEM PRA USUARIO.
-	scanf("%s", cpf); // 
-	
-	remove(cpf); // RESPONSAVEL POR DELETAR USUARIO,
-		    
-	FILE *file; // entrando na pasta
-	file = fopen(cpf,"r"); // ABRIU ARQUIVO pra leitura(a)
-		
-		
-		if (file == NULL)// NULL = NULO. 
-		{ 
-	    printf("Usuario não se encontra no sistema.\n");    	
+	if(file == NULL)
+	{
+		printf("\nO usuário não se encontra no sistema!.\n");
 		system("pause");
-		
 	}
-		fclose(file); // FECHANDO ARQUIVO.
-
-system("pause");	// PAUSANDO SISTEMA.
+	else
+	{
+		fclose(file);
+		remove(cpf);
+		FILE *file;	
+		file = fopen(cpf,"r");
+		if(file == NULL)
+		{
+			printf("\nUsuário deletado com sucesso!.\n");
+			system("pause");
+		}
+	}
+	fclose(file);
+	
 }
-
+	
 int main()
 {
 	
@@ -125,27 +129,23 @@ int main()
 	printf("Login de Administrador.\n\nDigite a sua senha:");
 	scanf("%s", senhadigitada);
 	
-	comparacao = strcmp (senhadigitada, "admin");
+	comparacao = strcmp (senhadigitada, "admin");  // 
 	
 	if (comparacao == 0)
 	{
-	
+	    system ("cls");
 		for(laco=1;laco=1;)
 		{
-		
-		
-			system("cls"); // RESPONSAVEL POR LIMPA A TELA.
-	
-	
+			
 			setlocale(LC_ALL, "Portuguese"); // Definindo as Linguagens.
 	
 			printf("\t###Cartório da Ebac###\n\n"); //Inicio do Menu
 			printf("Escolha as opções desejadas do MENU\n\n");
 			printf("\t1 - Registrar Nomes\n\n");
 			printf("\t2 - Consultar os Nomes\n\n");
-			printf("\t3 - Deletar Nomes \n\n"); // Fim do Menu
+			printf("\t3 - Deletar Nomes \n\n"); 
 			printf("\n\t4 - Sair do Sistema\n\n");
-			printf("Opção:");
+			printf("Opção:"); // fim do menu
 	
 			scanf("%d", &opcao); // Armazenando a escolha do usuario.
 	
@@ -155,21 +155,21 @@ int main()
 			switch (opcao) // INICIO DA SELEÇÃO DO MENU
 			{
 				case 1:
-					registrar(); // CHAMADA DE FUNCÕES
+				registrar(); // CHAMADA DE FUNCÃO REGISTRAR
 				break;
 					
-					case 2:
-						consultar(); // CHAMADA DE FUNCÕES
-					break;
+				case 2:
+				consultar(); // CHAMADA DE FUNCÃO CONSULTAR
+				break;
 					
-						case 3:
-							deletar(); // CHAMADA DE FUNCÕES
-						break;
+				case 3:
+				deletar(); // CHAMADA DE FUNCÃO DELETAR
+			    break;
 						
-						case 4:
-							printf("\n\t Obrigado por Utilizar nosso Sistema.");
-							return 0;
-							break;				
+				case 4:
+				printf("\n\t Obrigado por Utilizar nosso Sistema.");
+				return 0;
+				break;				
 							
 							default:
 								printf("Você escolheu uma opção Invalida.\n");
